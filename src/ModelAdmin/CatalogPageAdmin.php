@@ -20,7 +20,19 @@ use SilverStripe\ORM\DB;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Versioned\Versioned;
 use SilverStripe\View\Requirements;
-use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+
+// Compatibility layer for GridFieldOrderableRows
+if (!class_exists('LittleGiant\CatalogManager\ModelAdmin\GridFieldOrderableRows')) {
+    if (class_exists('Symbiote\GridFieldExtensions\GridFieldOrderableRows')) {
+        // SilverStripe 4
+        class_alias('Symbiote\GridFieldExtensions\GridFieldOrderableRows', 'LittleGiant\CatalogManager\ModelAdmin\GridFieldOrderableRows');
+    } else {
+        // SilverStripe 5 - GridField extensions are now in core
+        class_alias('SilverStripe\Forms\GridFieldExtensions\GridFieldOrderableRows', 'LittleGiant\CatalogManager\ModelAdmin\GridFieldOrderableRows');
+    }
+}
+
+use LittleGiant\CatalogManager\ModelAdmin\GridFieldOrderableRows;
 
 /**
  * Class CatalogPageAdmin
@@ -79,7 +91,7 @@ abstract class CatalogPageAdmin extends ModelAdmin
             $this->getList(),
             $fieldConfig = GridFieldConfig_RecordEditor::create(static::config()->get('page_length'))
                 ->removeComponentsByType(GridFieldDeleteAction::class)
-                ->addComponent(new GridfieldPublishAction())
+                ->addComponent(new GridFieldPublishAction())
         );
         Versioned::set_stage($originalStage);
 

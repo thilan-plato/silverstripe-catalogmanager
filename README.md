@@ -4,6 +4,13 @@ Catalog administration via a LeftAndMain like interface. Lets you edit and creat
 
 ## Features
 
+## Compatibility
+
+This module is compatible with:
+- SilverStripe 4.x
+- SilverStripe 5.x
+
+The module automatically handles the differences between SilverStripe 4 and 5, particularly around GridField extensions which moved to the core framework in SilverStripe 5.
 
 ## Installation
 

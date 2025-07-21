@@ -11,6 +11,12 @@ SilverStripe\SiteConfig\SiteConfig:
     - SITETREE_VIEW_ALL
     - SITETREE_EDIT_ALL
 
+# GridField extensions configuration for SilverStripe 4
 Symbiote\GridFieldExtensions\GridFieldOrderableRows:
+  extensions:
+    - LittleGiant\CatalogManager\Extensions\AutoPublishSortExtension
+
+# GridField extensions configuration for SilverStripe 5
+SilverStripe\Forms\GridFieldExtensions\GridFieldOrderableRows:
   extensions:
     - LittleGiant\CatalogManager\Extensions\AutoPublishSortExtension
